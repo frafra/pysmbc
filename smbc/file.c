@@ -340,6 +340,12 @@ File_tell (File *self)
   return File_lseek (self, args);
 }
 
+static PyObject *
+File_seekable (File *self)
+{
+  return Py_BuildValue("b", 1);
+}
+
 PyMethodDef File_methods[] =
   {
 	{"read", (PyCFunction)File_read, METH_VARARGS,
@@ -383,6 +389,10 @@ PyMethodDef File_methods[] =
 	{"tell", (PyCFunction)File_tell, METH_NOARGS,
 	 "tell() -> int\n\n"
 	 "@return: on success, current location, othwerwise -1"
+	},
+	{"seekable", (PyCFunction)File_seekable, METH_NOARGS,
+	 "seekable() -> bool\n\n"
+	 "@return: determine if seekable"
 	},
     { NULL } /* Sentinel */
   };
